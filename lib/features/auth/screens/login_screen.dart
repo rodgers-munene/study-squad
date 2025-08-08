@@ -1,14 +1,15 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:studysquad/core/routes/app_routes.dart';
 import 'package:studysquad/features/auth/services/auth_service.dart';
 import 'package:studysquad/features/auth/widgets/auth_background.dart';
-import 'package:studysquad/features/auth/widgets/auth_text_field.dart';
 import 'package:studysquad/features/auth/widgets/login_signup_navigator.dart';
 import 'package:studysquad/features/auth/widgets/password_field.dart';
 import 'package:studysquad/features/auth/widgets/remember_forget.dart';
+import 'package:studysquad/features/auth/widgets/separator.dart';
 import 'package:studysquad/features/auth/widgets/social_logins.dart';
 import 'package:studysquad/features/auth/widgets/text_field_input.dart';
-import 'package:studysquad/themes/themes.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -57,22 +58,33 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: AuthBackground(
-        child: Column(
-          children: [
-            const SizedBox(height: 40),
-            Text("Login", style: Theme.of(context).textTheme.headlineLarge),
-            SingleChildScrollView(
-              
-              child: Form(
+      resizeToAvoidBottomInset: true,
+      body: SingleChildScrollView(
+        child: AuthBackground(
+          child: Column(
+            children: [
+              Container(
+                width: 120,
+                height: 120,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage('assets/icons/logo.png'
+                    ),
+                    fit: BoxFit.contain
+                  ),
+                ),
+              ),
+              Text("Welcome Back", style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.bold)),
+              Form(
                 key: _formKey,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    const SizedBox(height: 15,),
+                    const SizedBox(height: 20,),
                     SocialLogins(),
-                    const SizedBox(height: 10,),
+                    const SizedBox(height: 20,),
+                    Separator(),
+                    const SizedBox(height: 20,),
                     TextFieldInput(controller: _emailController),
                     const SizedBox(height: 20,),
                     PasswordField(controller: _passwordController, hidePassword: _hidePassword, toggleVisibility: _toggleVisibility),
@@ -88,8 +100,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   ],
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

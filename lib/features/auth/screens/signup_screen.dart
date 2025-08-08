@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:studysquad/features/auth/widgets/auth_background.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -11,7 +12,7 @@ class _SignupScreenState extends State<SignupScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(child: Text("Welcome to signup screen")),
+      body: AuthBackground(child: Center(child: Text("Welcome to signup screen"))),
 
     );
   }
