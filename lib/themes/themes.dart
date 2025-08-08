@@ -17,7 +17,7 @@ ThemeData appTheme = ThemeData(
     seedColor: AppColors.primary,
     primary: AppColors.primary,
     secondary: AppColors.accent,
-    background: AppColors.background,
+    // background: AppColors.background,
     error: AppColors.error,
   ),
   textTheme: const TextTheme(

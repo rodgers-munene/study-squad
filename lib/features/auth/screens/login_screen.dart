@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:studysquad/core/routes/app_routes.dart';
 import 'package:studysquad/features/auth/services/auth_service.dart';
+import 'package:studysquad/features/auth/widgets/auth_background.dart';
 import 'package:studysquad/features/auth/widgets/auth_text_field.dart';
+import 'package:studysquad/features/auth/widgets/login_signup_navigator.dart';
+import 'package:studysquad/features/auth/widgets/password_field.dart';
+import 'package:studysquad/features/auth/widgets/remember_forget.dart';
+import 'package:studysquad/features/auth/widgets/social_logins.dart';
+import 'package:studysquad/features/auth/widgets/text_field_input.dart';
+import 'package:studysquad/themes/themes.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -50,55 +57,26 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Padding(
-          padding: EdgeInsets.all(20),
-          child: Column(
-            children: [
-              const SizedBox(height: 40),
-              Text("Login", style: Theme.of(context).textTheme.headlineLarge),
-              Form(
+      resizeToAvoidBottomInset: false,
+      body: AuthBackground(
+        child: Column(
+          children: [
+            const SizedBox(height: 40),
+            Text("Login", style: Theme.of(context).textTheme.headlineLarge),
+            SingleChildScrollView(
+              
+              child: Form(
                 key: _formKey,
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    const SizedBox(height: 20),
-                    const SizedBox(height: 10),
-                    AuthTextField(
-                      controller: _emailController,
-                      label: "Email",
-                      validator: (value) =>
-                          value!.isEmpty ? "Email is required" : null,
-                    ),
-                    const SizedBox(height: 12),
-                    Stack(
-                      children: [
-                        AuthTextField(
-                          controller: _passwordController,
-                          label: "Password",
-                          obscureText: _hidePassword,
-                          validator: (value) => value!.isEmpty
-                              ? "Password is required"
-                              : value.length < 6
-                              ? "Password too short"
-                              : null,
-                        ),
-                        Positioned(
-                          right: 10,
-                          child: _hidePassword
-                              ? 
-                              IconButton(
-                                  onPressed: _toggleVisibility,
-                                  icon: Icon(Icons.visibility_off_outlined),
-                                )
-                              : IconButton(
-                                  onPressed: _toggleVisibility,
-                                  icon: Icon(Icons.visibility_outlined),
-                                ),
-                        ),
-                      ],
-                    ),
+                    const SizedBox(height: 15,),
+                    SocialLogins(),
+                    const SizedBox(height: 10,),
+                    TextFieldInput(controller: _emailController),
+                    const SizedBox(height: 20,),
+                    PasswordField(controller: _passwordController, hidePassword: _hidePassword, toggleVisibility: _toggleVisibility),
+                    RememberForget(),
                     const SizedBox(height: 20),
                     _isLoading
                         ? const CircularProgressIndicator()
@@ -106,17 +84,12 @@ class _LoginScreenState extends State<LoginScreen> {
                             onPressed: _login,
                             child: const Text("Login"),
                           ),
-
-                    TextButton(
-                      onPressed: () =>
-                          Navigator.pushNamed(context, AppRoutes.signup),
-                      child: const Text("No account? Sign up"),
-                    ),
+                    LoginSignupNavigator(txt1: "Don't have an account?", txt2: "Sign Up.", route: AppRoutes.signup)
                   ],
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
