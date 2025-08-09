@@ -56,9 +56,9 @@ class AppRouter extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.done) {
           final user = FirebaseAuth.instance.currentUser;
           if (user != null) {
-            return const LoginScreen();
+            return const HomeScreen();
           } else {
-            return const SignupScreen();
+            return const LoginScreen();
           }
         }
         return const Center(child: CircularProgressIndicator());

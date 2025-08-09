@@ -7,6 +7,7 @@ class LoadingButton extends StatelessWidget {
   final IconData? icon;
   final double height;
   final double borderRadius;
+  final Color? bgColor;
 
   const LoadingButton({
     super.key,
@@ -16,6 +17,7 @@ class LoadingButton extends StatelessWidget {
     this.icon,
     this.height = 50,
     this.borderRadius = 8,
+    this.bgColor,
   });
 
   @override
@@ -24,6 +26,7 @@ class LoadingButton extends StatelessWidget {
       height: height,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
+          backgroundColor: bgColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(borderRadius),
           ),

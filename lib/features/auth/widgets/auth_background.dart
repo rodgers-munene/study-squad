@@ -12,14 +12,14 @@ class AuthBackground extends StatelessWidget {
             colors: [Color(0xFFB49EF4), Colors.white, Colors.white],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            stops: [0.0, 0.8, 1.0]
+            stops: [0.0, 0.7, 1.0]
           ),
         ),
       child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 20, vertical: 80),
+        margin: EdgeInsets.only(left: 20, right: 20, top: 80),
         decoration: BoxDecoration(
             border: Border.all(
-              color: Colors.white
+              color: Colors.black
             ),
             borderRadius: BorderRadius.circular(20),
             color: Colors.white

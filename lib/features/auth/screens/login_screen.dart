@@ -74,6 +74,9 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       body: SingleChildScrollView(
+        padding: EdgeInsets.only(
+          bottom: 8,
+        ),
         child: AuthBackground(
           child: Column(
             children: [
@@ -97,7 +100,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     RememberForget(),
                     const SizedBox(height: 20),
-                    LoadingButton(isLoading: _isLoading, onPressed: _login, text: "Login"),
+                    LoadingButton(isLoading: _isLoading, onPressed: _login, text: "Login", bgColor: Color.fromARGB(255, 141, 109, 235),),
                     LoginSignupNavigator(
                       txt1: "Don't have an account?",
                       txt2: "Sign Up.",

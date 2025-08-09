@@ -81,7 +81,7 @@ class _SignupScreenState extends State<SignupScreen> {
     return Scaffold(
       body: SingleChildScrollView(
         padding: EdgeInsets.only(
-          bottom: MediaQuery.of(context).viewInsets.bottom,
+          bottom: 8,
         ),
         child: AuthBackground(
           child: Column(
@@ -133,7 +133,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       },
                     ),
                     const SizedBox(height: 20),
-                    LoadingButton(isLoading: _isLoading, onPressed: _register, text: "Sign up"),
+                    LoadingButton(isLoading: _isLoading, onPressed: _register, text: "Sign up", bgColor: Color.fromARGB(255, 141, 109, 235)),
                     const SizedBox(height: 10),
                     LoginSignupNavigator(
                       txt1: "Already have an account?",
