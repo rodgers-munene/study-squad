@@ -10,6 +10,6 @@ class TextFieldInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AuthTextField(controller: controller, label: label,
-     validator: (value) => value!.isEmpty? "Email is required": null,);
+     validator: (value) => value!.isEmpty? "Field is required": null,);
   }
 }

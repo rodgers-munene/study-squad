@@ -16,7 +16,7 @@ class AuthBackground extends StatelessWidget {
           ),
         ),
       child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 20, vertical: 100),
+        margin: EdgeInsets.symmetric(horizontal: 20, vertical: 80),
         decoration: BoxDecoration(
             border: Border.all(
               color: Colors.white

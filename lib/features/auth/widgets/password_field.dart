@@ -4,11 +4,14 @@ import 'package:studysquad/features/auth/widgets/auth_text_field.dart';
 class PasswordField extends StatelessWidget {
   final TextEditingController controller;
   final bool hidePassword;
+  final String label;
   final VoidCallback toggleVisibility;
+  
 
   const PasswordField({
     super.key,
     required this.controller,
+    this.label = "Password",
     required this.hidePassword,
     required this.toggleVisibility,
   });
@@ -19,10 +22,10 @@ class PasswordField extends StatelessWidget {
       children: [
         AuthTextField(
           controller: controller,
-          label: "Password",
+          label: label,
           obscureText: hidePassword,
           validator: (value) => value!.isEmpty
-              ? "Password is required"
+              ? "This field is required"
               : value.length < 6
               ? "Password too short"
               : null,
