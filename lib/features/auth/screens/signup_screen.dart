@@ -1,5 +1,3 @@
-// ignore_for_file: use_build_context_synchronously
-
 import 'package:flutter/material.dart';
 import 'package:studysquad/core/routes/app_routes.dart';
 import 'package:studysquad/features/auth/services/auth_service.dart';
@@ -51,6 +49,8 @@ class _SignupScreenState extends State<SignupScreen> {
       _passwordController.text.trim(),
     );
 
+    if (!mounted) return;
+
     setState(() {
       _isLoading = false;
     });
@@ -59,11 +59,11 @@ class _SignupScreenState extends State<SignupScreen> {
       ScaffoldMessenger.of(
         context,
       ).showSnackBar(const SnackBar(content: Text("Registration Successful")));
-      Navigator.pushReplacementNamed(context, AppRoutes.home);
+      Navigator.pushNamedAndRemoveUntil(context, AppRoutes.home, (_) => false);
     } else {
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(SnackBar(content: Text(result)));
+      ).showSnackBar(SnackBar(content: Center(child: Text(result))));
     }
   }
 
@@ -80,9 +80,7 @@ class _SignupScreenState extends State<SignupScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        padding: EdgeInsets.only(
-          bottom: 8,
-        ),
+        padding: EdgeInsets.only(bottom: 8),
         child: AuthBackground(
           child: Column(
             children: [
@@ -133,7 +131,12 @@ class _SignupScreenState extends State<SignupScreen> {
                       },
                     ),
                     const SizedBox(height: 20),
-                    LoadingButton(isLoading: _isLoading, onPressed: _register, text: "Sign up", bgColor: Color.fromARGB(255, 141, 109, 235)),
+                    LoadingButton(
+                      isLoading: _isLoading,
+                      onPressed: _register,
+                      text: "Sign up",
+                      bgColor: Color.fromARGB(255, 141, 109, 235),
+                    ),
                     const SizedBox(height: 10),
                     LoginSignupNavigator(
                       txt1: "Already have an account?",
