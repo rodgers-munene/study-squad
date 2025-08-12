@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:studysquad/features/home/screens/home_screen.dart';
 import 'package:studysquad/features/auth/screens/login_screen.dart';
 import 'package:studysquad/features/auth/screens/signup_screen.dart';
+import 'package:studysquad/navigation/main_navigation.dart';
 import 'package:studysquad/themes/themes.dart';
 import 'firebase_options.dart';
 import 'core/routes/app_routes.dart';
@@ -50,18 +51,22 @@ class AppRouter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: Future.delayed(const Duration(seconds: 0)),
+    return StreamBuilder<User?>(
+      stream: FirebaseAuth.instance.authStateChanges(),
       builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          final user = FirebaseAuth.instance.currentUser;
-          if (user != null) {
-            return const HomeScreen();
-          } else {
-            return const LoginScreen();
-          }
+        // waiting for FirebaseAuth
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Scaffold(
+            body: const Center(child: CircularProgressIndicator()),
+          );
         }
-        return const Center(child: CircularProgressIndicator());
+
+        // if logged in -> go to main navigation
+        if (snapshot.hasData && snapshot.data != null) {
+          return const MainNavigation();
+        }
+
+        return const LoginScreen();
       },
     );
   }
